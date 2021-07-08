@@ -1,58 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 
-export const TheftCard = () => {
-  const [bicycleThefts, setBicycleThefts] = useState([])
-  const [userLocation, setUserLocation] = useState({
-    hasLocation: false,
-    latitude: 0,
-    longitude: 0,
-  })
-
-  useEffect(() => {
-    if (userLocation.hasLocation === false) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setUserLocation((previousUserLocation) => {
-            return {
-              ...previousUserLocation,
-              hasLocation: true,
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
-            }
-          })
-        },
-        (error) => {
-          console.log(error)
-        },
-        {
-          enableHighAccuracy: false,
-          timeout: 20000,
-          maximumAge: 0,
-        }
-      )
-    }
-  }, [userLocation.hasLocation])
-
-  useEffect(() => {
-    if (userLocation.hasLocation) {
-      fetch(
-        `https://data.police.uk/api/crimes-street/all-crime?lat=${userLocation.latitude}&lng=${userLocation.longitude}`
-      )
-        .then((response) => response.json())
-        .then((responseJson) =>
-          setBicycleThefts(
-            responseJson?.filter(
-              (crimeData) => crimeData.category === 'bicycle-theft'
-            )
-          )
-        )
-    }
-  }, [userLocation.hasLocation])
-
-  const determineTheftWarningLevel = (bicycleThefts) => {
+export const TheftCard = ({ bicycleThefts = [] }) => {
+  const determineTheftWarningLevel = () => {
     switch (true) {
       case bicycleThefts.length >= 101 && bicycleThefts.length <= 200:
         return { level: 'High', color: 'red' }
