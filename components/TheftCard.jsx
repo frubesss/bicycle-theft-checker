@@ -18,52 +18,44 @@ export const TheftCard = ({ bicycleThefts = [] }) => {
   }
 
   return (
-    <div
-      style={{
-        margin: '30px',
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-      }}
-    >
-      <Card>
-        <CardContent
+    <Card>
+      <CardContent
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Typography
           style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
+            marginBottom: '10px',
+          }}
+          variant="h5"
+          component="h2"
+          color="secondary"
+        >
+          Bicycle Thefts
+        </Typography>
+        <div
+          style={{
+            borderRadius: '50%',
+            width: '34px',
+            height: '34px',
+            padding: '20px',
+            background: determineTheftWarningLevel(bicycleThefts).color,
+            color: 'white',
+            textAlign: 'center',
+            font: '32px Arial, sans-serif',
+            marginBottom: '10px',
           }}
         >
-          <Typography
-            variant="h5"
-            component="h2"
-            color="secondary"
-            gutterBottom={true}
-          >
-            Bicycle Thefts
-          </Typography>
-          <div
-            style={{
-              borderRadius: '50%',
-              width: '34px',
-              height: '34px',
-              padding: '20px',
-              background: determineTheftWarningLevel(bicycleThefts).color,
-              color: 'white',
-              textAlign: 'center',
-              font: '32px Arial, sans-serif',
-            }}
-          >
-            {bicycleThefts.length}
-          </div>
-          <Typography variant="h5" component="h2" color="secondary">
-            {determineTheftWarningLevel(bicycleThefts).level}
-          </Typography>
-        </CardContent>
-      </Card>
-    </div>
+          {bicycleThefts.length}
+        </div>
+        <Typography variant="h5" component="h2" color="secondary">
+          {determineTheftWarningLevel(bicycleThefts).level}
+        </Typography>
+      </CardContent>
+    </Card>
   )
 }

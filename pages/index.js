@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/core/styles'
 
-import { TheftCard } from '../components/TheftCard'
 import { Map } from '../components/Map'
 import { CircularProgress } from '@material-ui/core'
 
@@ -85,14 +84,11 @@ export default function App() {
       <main>
         <ThemeProvider theme={theme}>
           {userLocation.hasLocation && hasBicycleThefts ? (
-            <>
-              <Map userLocation={userLocation} bicycleThefts={bicycleThefts} />
-              <TheftCard bicycleThefts={bicycleThefts} />
-            </>
+            <Map userLocation={userLocation} bicycleThefts={bicycleThefts} />
           ) : (
             <div
               style={{
-                height: '70vh',
+                height: '100vh',
                 width: '100%',
                 backgroundColor: '#e3e4de',
                 display: 'flex',
