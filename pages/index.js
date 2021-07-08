@@ -22,7 +22,17 @@ export default function App() {
   })
 
   const [bicycleThefts, setBicycleThefts] = useState([])
+  const [bestNearbySpot, setBestNearbySpot] = useState({
+    lng: 0,
+    lat: 0,
+  });
+  const [safestSpot, setSafestSpot] = useState({
+    lng: 0,
+    lat: 0,
+  });  
   const [hasBicycleThefts, setHasBicycleThefts] = useState(false)
+  const [hasBestNearbySpot, setHasBestNearbySpot] = useState(false)
+  const [hasSafestSpot, setHasSafestSpot] = useState(false)
   const [userLocation, setUserLocation] = useState({
     hasLocation: false,
     latitude: 0,
@@ -71,6 +81,36 @@ export default function App() {
     }
   }, [userLocation.hasLocation])
 
+  useEffect(() => {
+    if (userLocation.hasLocation === true) {
+      fetch(
+        `https://78c0k514k5.execute-api.eu-west-1.amazonaws.com/alpha/safest?lat=${userLocation.latitude}&lng=${userLocation.longitude}&radius=1.12`,
+      )
+        .then((response) => response.json())
+        .then((responseJson) => {
+          setSafestSpot(
+            responseJson
+          );
+          setHasSafestSpot(true)
+        })
+    }
+  }, [userLocation.hasLocation])
+
+  useEffect(() => {
+    if (userLocation.hasLocation === true) {
+      fetch(
+        `https://78c0k514k5.execute-api.eu-west-1.amazonaws.com/alpha/safest?lat=${userLocation.latitude}&lng=${userLocation.longitude}&radius=0.3`,
+      )
+        .then((response) => response.json())
+        .then((responseJson) => {
+          setBestNearbySpot(
+            responseJson
+          );
+          setHasBestNearbySpot(true)
+        })
+    }
+  }, [userLocation.hasLocation])
+
   return (
     <div>
       <Head>
@@ -83,8 +123,8 @@ export default function App() {
       </Head>
       <main>
         <ThemeProvider theme={theme}>
-          {userLocation.hasLocation && hasBicycleThefts ? (
-            <Map userLocation={userLocation} bicycleThefts={bicycleThefts} />
+          {userLocation.hasLocation && hasBicycleThefts && hasBestNearbySpot && hasSafestSpot ? (
+            <Map userLocation={userLocation} bicycleThefts={bicycleThefts} safestSpot={safestSpot} bestNearbySpot={bestNearbySpot} />
           ) : (
             <div
               style={{
