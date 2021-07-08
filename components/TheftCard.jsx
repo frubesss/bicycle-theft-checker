@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 
-export const MainContent = () => {
+export const TheftCard = () => {
   const [bicycleThefts, setBicycleThefts] = useState([])
   const [userLocation, setUserLocation] = useState({
     hasLocation: false,
@@ -54,11 +55,11 @@ export const MainContent = () => {
   const determineTheftWarningLevel = (bicycleThefts) => {
     switch (true) {
       case bicycleThefts.length >= 101 && bicycleThefts.length <= 200:
-        return 'High'
+        return { level: 'High', color: 'red' }
       case bicycleThefts.length >= 51 && bicycleThefts.length <= 100:
-        return 'Medium'
+        return { level: 'Medium', color: 'orange' }
       case bicycleThefts.length >= 0 && bicycleThefts.length <= 50:
-        return 'Low'
+        return { level: 'Low', color: 'green' }
       default:
         return 'Low'
     }
@@ -75,20 +76,42 @@ export const MainContent = () => {
         flexWrap: 'wrap',
       }}
     >
-      <Typography
-        style={{
-          marginBottom: '30px',
-        }}
-        color="textPrimary"
-        variant="h3"
-        component="h1"
-      >
-        <b>Bicycle Theft Checker</b>
-      </Typography>
-      Warning Level: {determineTheftWarningLevel(bicycleThefts)}
-      <br />
-      Bike thefts in this area (1 Mile Radius) this month:{' '}
-      {bicycleThefts.length}
+      <Card>
+        <CardContent
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Typography
+            variant="h5"
+            component="h2"
+            color="secondary"
+            gutterBottom={true}
+          >
+            Bicycle Thefts
+          </Typography>
+          <div
+            style={{
+              borderRadius: '50%',
+              width: '34px',
+              height: '34px',
+              padding: '20px',
+              background: determineTheftWarningLevel(bicycleThefts).color,
+              color: 'white',
+              textAlign: 'center',
+              font: '32px Arial, sans-serif',
+            }}
+          >
+            {bicycleThefts.length}
+          </div>
+          <Typography variant="h5" component="h2" color="secondary">
+            {determineTheftWarningLevel(bicycleThefts).level}
+          </Typography>
+        </CardContent>
+      </Card>
     </div>
   )
 }

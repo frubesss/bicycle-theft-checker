@@ -3,7 +3,7 @@ import React from 'react'
 import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/core/styles'
 
-import { MainContent } from '../components/MainContent'
+import { TheftCard } from '../components/TheftCard'
 
 export default function App() {
   const theme = createMuiTheme({
@@ -32,7 +32,7 @@ export default function App() {
       </Head>
       <main>
         <ThemeProvider theme={theme}>
-          <MainContent />
+          <TheftCard />
         </ThemeProvider>
       </main>
     </div>
