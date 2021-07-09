@@ -4,7 +4,7 @@ import GoogleMapReact from 'google-map-react'
 import { CustomMarker } from './CustomMarker'
 import { TheftCard } from './TheftCard'
 
-export function Map({ userLocation, bicycleThefts, safestSpot, bestNearbySpot }) {
+export function Map({ userLocation, bicycleThefts, bestNearbySpot }) {
   const heatmapData = {
     positions: bicycleThefts.map((bicycleTheft) => ({
       lat: bicycleTheft.location.latitude,
@@ -12,8 +12,8 @@ export function Map({ userLocation, bicycleThefts, safestSpot, bestNearbySpot })
       weight: Math.floor(Math.random() * Math.floor(5)),
     })),
     options: {
-      radius: 20,
-      opacity: 1,
+      radius: 70,
+      opacity: 0.4,
     },
   }
   return (
@@ -29,7 +29,7 @@ export function Map({ userLocation, bicycleThefts, safestSpot, bestNearbySpot })
           lng: userLocation.longitude,
         }}
         heatmap={heatmapData}
-        defaultZoom={13}
+        defaultZoom={14}
         yesIWantToUseGoogleMapApiInternals
         onGoogleApiLoaded={({ map }) =>
           new google.maps.Circle({
@@ -48,11 +48,6 @@ export function Map({ userLocation, bicycleThefts, safestSpot, bestNearbySpot })
           color="#4285F4"
           lat={userLocation.latitude}
           lng={userLocation.longitude}
-        />
-        <CustomMarker
-          color="#2EFF00"
-          lat={safestSpot.lat}
-          lng={safestSpot.lng}
         />
         <CustomMarker
           color="#00FFB2"
