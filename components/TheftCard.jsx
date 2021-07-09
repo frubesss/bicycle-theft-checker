@@ -2,6 +2,7 @@ import React from 'react'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
+import { Avatar, Chip } from '@material-ui/core'
 
 export const TheftCard = ({ bicycleThefts = [] }) => {
   const determineTheftWarningLevel = () => {
@@ -18,7 +19,14 @@ export const TheftCard = ({ bicycleThefts = [] }) => {
   }
 
   return (
-    <Card>
+    <Card
+      style={{
+        width: '200px',
+        position: 'absolute',
+        top: 20,
+        left: 60,
+      }}
+    >
       <CardContent
         style={{
           display: 'flex',
@@ -37,24 +45,19 @@ export const TheftCard = ({ bicycleThefts = [] }) => {
         >
           Bicycle Thefts
         </Typography>
-        <div
+        <Avatar
           style={{
-            borderRadius: '50%',
-            width: '34px',
-            height: '34px',
-            padding: '20px',
-            background: determineTheftWarningLevel(bicycleThefts).color,
-            color: 'white',
-            textAlign: 'center',
-            font: '32px Arial, sans-serif',
             marginBottom: '10px',
           }}
         >
           {bicycleThefts.length}
-        </div>
-        <Typography variant="h5" component="h2" color="secondary">
-          {determineTheftWarningLevel(bicycleThefts).level}
-        </Typography>
+        </Avatar>
+        <Chip
+          label={`Theft Level: ${
+            determineTheftWarningLevel(bicycleThefts).level
+          }`}
+          color="primary"
+        />
       </CardContent>
     </Card>
   )

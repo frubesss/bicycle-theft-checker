@@ -10,13 +10,13 @@ export default function App() {
   const theme = createMuiTheme({
     palette: {
       primary: {
-        main: '#a270bc',
+        main: '#987A71',
       },
       secondary: {
-        main: '#4285F4',
+        main: '#A9A878',
       },
       text: {
-        primary: '#fff',
+        primary: '#F2E5C1',
       },
     },
   })

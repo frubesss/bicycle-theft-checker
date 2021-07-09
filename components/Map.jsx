@@ -17,7 +17,7 @@ export function Map({ userLocation, bicycleThefts, bestNearbySpot }) {
     },
   }
   return (
-    <div style={{ height: '70vh', width: '100%' }}>
+    <div style={{ height: '100vh', width: '100%' }}>
       <GoogleMapReact
         options={{ fullscreenControl: false }}
         bootstrapURLKeys={{
@@ -31,18 +31,6 @@ export function Map({ userLocation, bicycleThefts, bestNearbySpot }) {
         heatmap={heatmapData}
         defaultZoom={14}
         yesIWantToUseGoogleMapApiInternals
-        onGoogleApiLoaded={({ map }) =>
-          new google.maps.Circle({
-            strokeColor: '#1aa086',
-            strokeOpacity: 0.8,
-            strokeWeight: 2,
-            fillColor: '#1aa086',
-            fillOpacity: 0.3,
-            map,
-            center: { lat: userLocation.latitude, lng: userLocation.longitude },
-            radius: 1900,
-          })
-        }
       >
         <CustomMarker
           color="#4285F4"
@@ -50,13 +38,13 @@ export function Map({ userLocation, bicycleThefts, bestNearbySpot }) {
           lng={userLocation.longitude}
         />
         <CustomMarker
-          color="#00FFB2"
+          color="#905325"
           lat={bestNearbySpot.lat}
           lng={bestNearbySpot.lng}
         />
         {bicycleThefts.map((bicycleTheft) => (
           <CustomMarker
-            color="#9C51B6"
+            color="#A9A878"
             key={bicycleTheft.id}
             lat={bicycleTheft.location.latitude}
             lng={bicycleTheft.location.longitude}
