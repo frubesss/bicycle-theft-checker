@@ -1,4 +1,4 @@
-# Bicycle Theft Checker
+# bicycle-theft-checker
 
 > Google Maps application to check how safe it is to park your bicycle based on bicycle thefts
 > within a 1-mile radius of your current location.
