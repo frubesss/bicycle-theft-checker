@@ -23,15 +23,6 @@ perfect location to park your bike based on this data.
 * Github: [@frubesss](https://github.com/frubesss)
 * Email: robetson.cra@gmail.com
 
-## 🤝 Contributing
-
-Contributions, issues and feature requests are welcome!
-
-## Show your support
-
-Give a ⭐️ if this project helped you!
-
 ## Technology
 
-- [Nextjs](https://nextjs.org/)
 - [Police Street-level crimes](https://data.police.uk/docs/method/crime-street/)
