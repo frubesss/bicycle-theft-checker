@@ -4,7 +4,7 @@ import GoogleMapReact from 'google-map-react'
 import { CustomMarker } from './CustomMarker'
 import { TheftCard } from './TheftCard'
 
-export function Map({ userLocation, bicycleThefts, bestNearbySpot }) {
+export function Map({ userLocation, bicycleThefts }) {
   const heatmapData = {
     positions: bicycleThefts.map((bicycleTheft) => ({
       lat: bicycleTheft.location.latitude,
@@ -36,11 +36,6 @@ export function Map({ userLocation, bicycleThefts, bestNearbySpot }) {
           color="#4285F4"
           lat={userLocation.latitude}
           lng={userLocation.longitude}
-        />
-        <CustomMarker
-          color="#905325"
-          lat={bestNearbySpot.lat}
-          lng={bestNearbySpot.lng}
         />
         {bicycleThefts.map((bicycleTheft) => (
           <CustomMarker
