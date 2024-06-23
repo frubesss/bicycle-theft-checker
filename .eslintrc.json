@@ -1,22 +1,3 @@
 {
-    "parser": "@typescript-eslint/parser",
-    "plugins": ["@typescript-eslint"],
-    "extends": [
-        "eslint:recommended",
-        "prettier",
-        "prettier/@typescript-eslint",
-        "plugin:jsx-a11y/recommended",
-        "plugin:react/recommended",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:react-hooks/recommended"
-    ],
-    "env": {
-        "browser": true,
-        "node": true
-    },
-    "settings": {
-        "react": {
-            "version": "detect"
-        }
-    }
+    "extends": "next/core-web-vitals"
 }
