@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import { useEffect, useState } from 'react'
 import { Map } from './components/Map'
@@ -10,7 +10,7 @@ export default function Home() {
   const [userLocation, setUserLocation] = useState({
     hasLocation: false,
     latitude: 0,
-    longitude: 0,
+    longitude: 0
   })
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function Home() {
               ...previousUserLocation,
               hasLocation: true,
               latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
+              longitude: position.coords.longitude
             }
           })
         },
@@ -32,7 +32,7 @@ export default function Home() {
         {
           enableHighAccuracy: false,
           timeout: 20000,
-          maximumAge: 0,
+          maximumAge: 0
         }
       )
     }
@@ -56,22 +56,34 @@ export default function Home() {
   }, [userLocation.hasLocation])
 
   return (
-      <main>
-        {userLocation.hasLocation && hasBicycleThefts ? (
-          <Map userLocation={userLocation} bicycleThefts={bicycleThefts} />
-        ) : (
-          <div
-            style={{
-              height: '100vh',
-              width: '100%',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <div>Loading...</div>
-          </div>
-        )}
-      </main>
+    <main>
+      <style>
+        {`
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  `}
+      </style>
+      {!userLocation.hasLocation && hasBicycleThefts ? (
+        <Map userLocation={userLocation} bicycleThefts={bicycleThefts} />
+      ) : (
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh'
+        }}>
+          <div style={{
+            border: '4px solid #f3f3f3',
+            borderTop: '4px solid #A9A878',
+            borderRadius: '50%',
+            width: '15px',
+            height: '15px',
+            animation: 'spin 2s linear infinite'
+          }} />
+        </div>
+      )}
+    </main>
   )
 }
