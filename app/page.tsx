@@ -46,7 +46,7 @@ export default function Home() {
         .then((responseJson) => {
           setBicycleThefts(
             responseJson?.filter(
-              (crimeData) => crimeData.category === 'bicycle-theft'
+              (crimeData: { category: string }) => crimeData.category === 'bicycle-theft'
             )
           )
         })
