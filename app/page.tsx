@@ -6,6 +6,7 @@ import { Map } from './components/Map'
 export default function Home() {
 
   const [bicycleThefts, setBicycleThefts] = useState([])
+  const [hasBicycleThefts, setHasBicycleThefts] = useState(false)
   const [userLocation, setUserLocation] = useState({
     hasLocation: false,
     latitude: 0,
@@ -44,6 +45,7 @@ export default function Home() {
       )
         .then((response) => response.json())
         .then((responseJson) => {
+          setHasBicycleThefts(true)
           setBicycleThefts(
             responseJson?.filter(
               (crimeData: { category: string }) => crimeData.category === 'bicycle-theft'
@@ -55,7 +57,21 @@ export default function Home() {
 
   return (
       <main>
-        <Map userLocation={userLocation} bicycleThefts={bicycleThefts} />
+        {userLocation.hasLocation && hasBicycleThefts ? (
+          <Map userLocation={userLocation} bicycleThefts={bicycleThefts} />
+        ) : (
+          <div
+            style={{
+              height: '100vh',
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <div>Loading...</div>
+          </div>
+        )}
       </main>
   )
 }

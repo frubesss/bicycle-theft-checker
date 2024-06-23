@@ -23,7 +23,6 @@ export function Map({ userLocation, bicycleThefts }: {
   return (
     <div style={{ height: '100vh', width: '100%' }}>
       <GoogleMapReact
-        options={{ fullscreenControl: false }}
         bootstrapURLKeys={{
           key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY ?? '',
           libraries: ['visualization']
