@@ -1,6 +1,7 @@
 import GoogleMapReact from 'google-map-react'
 
 import { CustomMarker } from './CustomMarker'
+import { TheftCard } from '@/app/components/TheftCard'
 
 export function Map({ userLocation, bicycleThefts }: {
   userLocation: { latitude: number, longitude: number },
@@ -23,6 +24,7 @@ export function Map({ userLocation, bicycleThefts }: {
   return (
     <div style={{ height: '100vh', width: '100%' }}>
       <GoogleMapReact
+        options={{disableDefaultUI: true}}
         bootstrapURLKeys={{
           key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY ?? '',
           libraries: ['visualization']
@@ -50,6 +52,7 @@ export function Map({ userLocation, bicycleThefts }: {
           />
         ))}
       </GoogleMapReact>
+      <TheftCard bicycleThefts={bicycleThefts}/>
     </div>
   )
 }

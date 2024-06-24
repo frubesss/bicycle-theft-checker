@@ -65,7 +65,7 @@ export default function Home() {
     }
   `}
       </style>
-      {!userLocation.hasLocation && hasBicycleThefts ? (
+      {userLocation.hasLocation && hasBicycleThefts ? (
         <Map userLocation={userLocation} bicycleThefts={bicycleThefts} />
       ) : (
         <div style={{
