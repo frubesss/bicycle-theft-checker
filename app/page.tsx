@@ -5,7 +5,6 @@ import { Map } from "./components/Map"
 
 export default function Home() {
   const [bicycleThefts, setBicycleThefts] = useState([])
-  const [hasBicycleThefts, setHasBicycleThefts] = useState(false)
   const [userLocation, setUserLocation] = useState({
     hasLocation: false,
     latitude: 0,
@@ -16,17 +15,14 @@ export default function Home() {
     if (!userLocation.hasLocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          setUserLocation((previousUserLocation) => {
-            return {
-              ...previousUserLocation,
-              hasLocation: true,
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
-            }
+          setUserLocation({
+            hasLocation: true,
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
           })
         },
         (error) => {
-          console.log(error)
+          console.error("Error fetching location:", error)
         },
         {
           enableHighAccuracy: false,
@@ -43,29 +39,21 @@ export default function Home() {
         `https://data.police.uk/api/crimes-street/all-crime?lat=${userLocation.latitude}&lng=${userLocation.longitude}`,
       )
         .then((response) => response.json())
-        .then((responseJson) => {
-          setHasBicycleThefts(true)
-          setBicycleThefts(
-            responseJson?.filter(
-              (crimeData: { category: string }) =>
-                crimeData.category === "bicycle-theft",
-            ),
+        .then((data) => {
+          const bicycleTheftsData = data.filter(
+            (crime: { category: string }) => crime.category === "bicycle-theft",
           )
+          setBicycleThefts(bicycleTheftsData)
+        })
+        .catch((error) => {
+          console.error("Error fetching bicycle thefts:", error)
         })
     }
   }, [userLocation.hasLocation])
 
   return (
     <main>
-      <style>
-        {`
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-  `}
-      </style>
-      {userLocation.hasLocation && hasBicycleThefts ? (
+      {userLocation.hasLocation && bicycleThefts.length > 0 ? (
         <Map userLocation={userLocation} bicycleThefts={bicycleThefts} />
       ) : (
         <div
@@ -73,6 +61,7 @@ export default function Home() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            flexDirection: "column",
             height: "100vh",
           }}
         >
@@ -86,6 +75,17 @@ export default function Home() {
               animation: "spin 2s linear infinite",
             }}
           />
+          <p
+            style={{
+              marginTop: "20px",
+              color: "#333",
+              fontSize: "16px",
+              fontFamily: "sans-serif",
+              textAlign: "center",
+            }}
+          >
+            Please ensure you have location services enabled
+          </p>
         </div>
       )}
     </main>

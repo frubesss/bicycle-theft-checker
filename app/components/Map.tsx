@@ -1,7 +1,7 @@
 import GoogleMapReact from "google-map-react"
 
 import { CustomMarker } from "./CustomMarker"
-import { TheftCard } from "@/app/components/TheftCard"
+import { TheftCard } from "./TheftCard"
 
 export function Map({
   userLocation,
@@ -17,7 +17,7 @@ export function Map({
     positions: bicycleThefts.map((bicycleTheft) => ({
       lat: bicycleTheft.location.latitude,
       lng: bicycleTheft.location.longitude,
-      weight: Math.floor(Math.random() * Math.floor(5)),
+      weight: Math.floor(Math.random() * 5),
     })),
     options: {
       radius: 70,
@@ -30,13 +30,14 @@ export function Map({
       <GoogleMapReact
         options={{ disableDefaultUI: true }}
         bootstrapURLKeys={{
-          key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY ?? "",
+          key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY || "",
           libraries: ["visualization"],
         }}
         defaultCenter={{
           lat: userLocation.latitude,
           lng: userLocation.longitude,
         }}
+        heatmapLibrary={true}
         heatmap={heatmapData}
         defaultZoom={14}
         yesIWantToUseGoogleMapApiInternals

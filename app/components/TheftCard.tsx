@@ -43,13 +43,7 @@ export const TheftCard = ({
         }}
       >
         <h2>Bicycle Thefts</h2>
-        <div
-          style={{
-            marginBottom: "10px",
-          }}
-        >
-          This month
-        </div>
+        <div style={{ marginBottom: "10px" }}>This month</div>
         <div
           style={{
             marginBottom: "10px",
