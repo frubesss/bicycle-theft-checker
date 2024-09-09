@@ -53,7 +53,7 @@ export default function Home() {
 
   return (
     <main>
-      {userLocation.hasLocation && bicycleThefts.length > 0 ? (
+      {userLocation.hasLocation && bicycleThefts ? (
         <Map userLocation={userLocation} bicycleThefts={bicycleThefts} />
       ) : (
         <div
